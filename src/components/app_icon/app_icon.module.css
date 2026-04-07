@@ -1,4 +1,6 @@
 .appIcon {
+  position: relative;
+
   &.grayscale {
     filter: grayscale(100%);
   }
@@ -19,4 +21,5 @@
   pointer-events: none;
   border-radius: inherit;
   mix-blend-mode: hue;
+  mask: url('/app_view/app_icon_mask.svg') center/contain no-repeat;
 }
