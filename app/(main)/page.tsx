@@ -1,12 +1,55 @@
 import { AppleFeatureLaurelsBadge } from "@/components/apple_feature_laurels_badge/apple_feature_laurels_badge";
 import { CardGrid } from "@/components/card_grid/card_grid";
 import { DownloadActionButton } from "@/components/download_action_button/download_action_button";
+import { EmailForm } from "@/components/email_form/email_form";
 import { Hero } from "@/components/hero/hero";
 import { RatingLaurelsBadge } from "@/components/rating_laurels_badge/rating_laurels_badge";
 import { Section } from "@/components/section/section";
 import { TestimonialsGrid } from "@/components/testimonials_grid/testimonials_grid";
+import { IS_WAITLIST_ENABLED } from "@/constants";
+
+import styles from "./page.module.css";
 
 export default function Page() {
+  if (IS_WAITLIST_ENABLED) {
+    return (
+      <>
+        <div className={styles.waitlistSpacer} />
+
+        <Section paddingTop={60}>
+          <Hero
+            title="App Title"
+            subtitle="Short app description that highlights what the app does and its key value"
+            media={
+              <Hero.Image
+                src="/app_view/screenshot_placeholder.png"
+                alt=""
+                bezel="iPhone 17 Black"
+              />
+            }
+            action={
+              <>
+                <EmailForm
+                  providerConfig={{
+                    provider: "loops",
+                    config: {
+                      formId: "your-loops-form-id",
+                    },
+                  }}
+                />
+                {/*
+                  You can also use a simple button to redirect users
+                  to a custom page where you collect emails
+                */}
+                {/* <GetNotifiedActionButton href="your-email-form-link" /> */}
+              </>
+            }
+          />
+        </Section>
+      </>
+    );
+  }
+
   return (
     <>
       <Section paddingTop={100}>
