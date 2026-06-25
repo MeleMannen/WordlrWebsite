@@ -54,7 +54,7 @@ function OpenGraphPreviewContent({
   useBezelImageRenderer({
     canvasRef,
     src: screenshotSrc,
-    bezel: bezel || "iPhone 17 Black",
+    bezel: bezel || "iPhone 16 Pro Max Space Black",
     crop: bezelCrop,
   });
 
@@ -65,7 +65,7 @@ function OpenGraphPreviewContent({
       ref={previewFrameRef}
     >
       <div className={styles.content}>
-        <AppIcon src={iconSrc} size={180} />
+        <AppIcon src={iconSrc} size={200} />
         <h1 className={`${styles.title} ${titleFontStyleClass}`}>{title}</h1>
       </div>
 

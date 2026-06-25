@@ -16,8 +16,8 @@ export const metadata: Metadata = {
    * Recommended length for title is max 60 characters.
    * Recommended length for description is max 160 characters.
    */
-  title: "Website title",
-  description: "Website description",
+  title: "Wordlr - Guess the word",
+  description: "A flexible word game with 1-8 letter puzzles, multiple languages, searchable word lists, definitions, stats, and history.",
 
   /**
    * Your website URL.
@@ -32,8 +32,8 @@ export const metadata: Metadata = {
    * run the dev server and go to `http://localhost:3000/open-graph-builder`.
    */
   openGraph: {
-    title: "App title",
-    description: "App description",
+    title: "Wordlr - Guess the word",
+    description: "A flexible word game with 1-8 letter puzzles, multiple languages, searchable word lists, definitions, stats, and history.",
     url: "https://app-website-url.com",
     images: [
       {
@@ -47,8 +47,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "App title",
-    description: "App description",
+    title: "Wordlr",
+    description: "A flexible word game with 1-8 letter puzzles, multiple languages, searchable word lists, definitions, stats, and history.",
     images: ["/og-preview.png"],
   },
 };
@@ -80,13 +80,13 @@ export default function RootLayout({
         <ThemeProvider>
           {!IS_WAITLIST_ENABLED && (
             <Navbar
-              icon={<AppIcon src="/app_view/icon_placeholder.png" />}
-              appName="App Name"
+              icon={<AppIcon src="/favicon.png" />}
+              appName="Wordlr"
               links={[
                 { label: "Features", href: "#features" },
                 // Uncomment the line below once you're ready to start using Release Notes
                 // { label: "Release Notes", href: "/release-notes" },
-                { label: "Contact", href: "mailto:your.email@gmail.com" },
+                { label: "Contact", href: "mailto:kristoffer.fredrik@icloud.com" },
               ]}
               action={<DownloadActionButton />}
             />
@@ -101,21 +101,20 @@ export default function RootLayout({
           <CompactFooter
             appIcon={
               <AppIcon
-                src="/app_view/icon_placeholder.png"
-                filter="grayscale"
+                src="/favicon.png"
               />
             }
             links={[
-              { label: "Privacy", href: "/privacy" },
+              { label: "Privacy Policy", href: "/privacy" },
               {
                 label: "Terms of Use",
                 href: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
                 external: true,
               },
-              {
-                label: "Follow Updates",
-                href: "https://your-social-media.com",
-              },
+              // {
+              //   label: "Follow Updates",
+              //   href: "https://your-social-media.com",
+              // },
             ]}
             footnoteLeading={`© ${new Date().getFullYear()}. All rights reserved.`}
             footnoteTrailing={

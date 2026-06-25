@@ -2,12 +2,13 @@ import { Icon } from "@/components/icon/icon";
 import type { MATERIAL_SYMBOLS } from "@/constants";
 import { buildClassNameForFontStyle } from "@/lib/utils";
 import type { FontStyle } from "@/types/shared";
-import sharedGridStyles from "../../shared.module.css";
+import { TiltCard } from "../tilt_card/tilt_card";
 import styles from "./icon_card.module.css";
 
 interface IconCardProps {
   maxWidth: "third" | "half" | "twoThirds" | "full";
-  iconName: (typeof MATERIAL_SYMBOLS)[number];
+  iconName?: (typeof MATERIAL_SYMBOLS)[number];
+  iconLabel?: string;
   title: string;
   titleFontStyle?: FontStyle;
   description?: string;
@@ -16,6 +17,7 @@ interface IconCardProps {
 export function IconCard({
   maxWidth,
   iconName,
+  iconLabel,
   title,
   titleFontStyle,
   description,
@@ -26,18 +28,16 @@ export function IconCard({
   });
 
   return (
-    <figure
-      className={`${sharedGridStyles.gridCardItem} ${sharedGridStyles[maxWidth]}`}
-    >
+    <TiltCard maxWidth={maxWidth}>
       <div className={styles.iconCard}>
         <div className={styles.icon} aria-hidden="true">
-          <Icon name={iconName} size="large" />
+          {iconLabel ?? (iconName && <Icon name={iconName} size="large" />)}
         </div>
         <div className={styles.info}>
           <h2 className={`${styles.title} ${titleFontStyleClass}`}>{title}</h2>
           <p className={styles.description}>{description}</p>
         </div>
       </div>
-    </figure>
+    </TiltCard>
   );
 }

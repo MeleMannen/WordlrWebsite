@@ -1,14 +1,15 @@
-import { AppleFeatureLaurelsBadge } from "@/components/apple_feature_laurels_badge/apple_feature_laurels_badge";
 import { CardGrid } from "@/components/card_grid/card_grid";
 import { DownloadActionButton } from "@/components/download_action_button/download_action_button";
 import { EmailForm } from "@/components/email_form/email_form";
 import { Hero } from "@/components/hero/hero";
 import { RatingLaurelsBadge } from "@/components/rating_laurels_badge/rating_laurels_badge";
 import { Section } from "@/components/section/section";
-import { TestimonialsGrid } from "@/components/testimonials_grid/testimonials_grid";
 import { IS_WAITLIST_ENABLED } from "@/constants";
 
 import styles from "./page.module.css";
+
+const IMAGE_PATH = "/app_view/app_images/";
+const WORDLR_BEZEL = "iPhone 16 Pro Max Space Black";
 
 export default function Page() {
   if (IS_WAITLIST_ENABLED) {
@@ -18,31 +19,24 @@ export default function Page() {
 
         <Section paddingTop={60}>
           <Hero
-            title="App Title"
-            subtitle="Short app description that highlights what the app does and its key value"
+            title="Wordlr"
+            subtitle="A flexible word game with 1-8 letter puzzles, multiple languages, searchable word lists, definitions, stats, and history."
             media={
               <Hero.Image
-                src="/app_view/screenshot_placeholder.png"
-                alt=""
-                bezel="iPhone 17 Black"
+                src={`${IMAGE_PATH}game_setup_word_length_language.png`}
+                alt="Wordlr setup screen with word length, language, daily word, unlimited, and expert mode options."
+                bezel={WORDLR_BEZEL}
               />
             }
             action={
-              <>
-                <EmailForm
-                  providerConfig={{
-                    provider: "loops",
-                    config: {
-                      formId: "your-loops-form-id",
-                    },
-                  }}
-                />
-                {/*
-                  You can also use a simple button to redirect users
-                  to a custom page where you collect emails
-                */}
-                {/* <GetNotifiedActionButton href="your-email-form-link" /> */}
-              </>
+              <EmailForm
+                providerConfig={{
+                  provider: "loops",
+                  config: {
+                    formId: "your-loops-form-id",
+                  },
+                }}
+              />
             }
           />
         </Section>
@@ -54,24 +48,21 @@ export default function Page() {
     <>
       <Section paddingTop={100}>
         <Hero
-          title="App Title"
-          subtitle="Short app description that highlights what the app does and its key value"
+          title="Wordlr"
+          subtitle="Guess words your way: 1-8 letters, five languages, daily and unlimited modes, built-in definitions, smart word search, stats, and game history."
           media={
             <Hero.Image
-              src="/app_view/screenshot_placeholder.png"
-              bezel="iPhone 17 Black"
-              alt=""
+              src={`${IMAGE_PATH}gameplay_words_solve_animation.png`}
+              bezel={WORDLR_BEZEL}
+              alt="Wordlr game board showing the word WORDS being solved."
             />
           }
           badges={
-            <>
-              <RatingLaurelsBadge
-                showStars={true}
-                rating={4.9}
-                caption="worldwide rating"
-              />
-              <AppleFeatureLaurelsBadge featureName="App of the Day" />
-            </>
+            <RatingLaurelsBadge
+              showStars={true}
+              rating={4.6}
+              caption="Worldwide rating"
+            />
           }
           action={<DownloadActionButton size="medium" />}
         />
@@ -80,185 +71,201 @@ export default function Page() {
       <Section navigationAnchor="features">
         <CardGrid rowHeight={438}>
           <CardGrid.StackedCard
+            maxWidth="twoThirds"
+            title="Choose 1-8 letter words in five languages"
+            description="Set the exact word length and language before you play, then switch between daily puzzles and unlimited rounds whenever you want."
+            media={
+              <CardGrid.StackedCard.Image
+                src={`${IMAGE_PATH}game_setup_word_length_language.png`}
+                alt="Wordlr setup screen with word length and language controls."
+                bezel={WORDLR_BEZEL}
+                bezelCrop={{ edge: "bottom", croppedRatio: 0.18 }}
+              />
+            }
+            textAlignment="leading"
+          />
+
+          <CardGrid.StackedCard
             maxWidth="third"
-            title="Feature Title"
-            description="Short feature description"
+            title="Daily, unlimited, or expert"
+            description="Play a quick daily word, keep going in unlimited mode, or add pressure by enabling expert mode."
             media={
               <CardGrid.StackedCard.Image
-                src="/app_view/stacked_card_image_placeholder_light.png"
-                srcset={[
-                  {
-                    src: "/app_view/stacked_card_image_placeholder_dark.png",
-                    theme: "dark",
-                  },
-                ]}
-                alt="Grid"
-                bezelCrop={{ edge: "bottom", croppedRatio: 0.1 }}
+                src={`${IMAGE_PATH}english_words_result.png`}
+                alt="Five-letter Wordlr board with guesses entered."
+                bezel={WORDLR_BEZEL}
+                bezelCrop={{ edge: "bottom", croppedRatio: 0.40 }}
               />
             }
-            textAlignment="leading"
-          />
-
-          <CardGrid.StackedCard
-            maxWidth="twoThirds"
-            title="Another Feature Title"
-            description="And another feature description"
-            media={
-              <CardGrid.StackedCard.Image
-                src="/app_view/screenshot_placeholder.png"
-                alt="Make sure to provide an image description for accessibility purposes"
-                bezel="iPhone 17 Black"
-              />
-            }
-            textAlignment="leading"
-          />
-
-          <CardGrid.StackedCard
-            maxWidth="twoThirds"
-            title="Keep Titles Concise"
-            description="Use the extra space on big cards for longer descriptions"
             layoutDirection="reverse"
-            media={
-              <CardGrid.StackedCard.Image
-                src="/app_view/screenshot_placeholder.png"
-                alt="Make sure to provide an image description for accessibility purposes"
-                bezel="iPhone 17 Black"
-                bezelCrop={{ edge: "bottom", croppedRatio: 0.25 }}
-              />
-            }
             textAlignment="leading"
-          />
-
-          <CardGrid.OverlaidCard
-            maxWidth="third"
-            imageSrc="/app_view/overlay_image_placeholder_light.png"
-            imageSrcset={[
-              {
-                src: "/app_view/overlay_image_placeholder_dark.png",
-                theme: "dark",
-              },
-            ]}
-            title="Feature On An Overlay Card"
-            description="These look great with photos or a custom graphics if you're willing to go the extra mile"
-            textAlignment="center"
-          />
-
-          <CardGrid.StackedCard
-            maxWidth="full"
-            title="Huge Card For a Major Feature"
-            description="Zoomed in UI or a custom graphic look great here"
-            media={
-              <CardGrid.StackedCard.Image
-                src="/app_view/stacked_card_image_placeholder_light.png"
-                srcset={[
-                  {
-                    src: "/app_view/stacked_card_image_placeholder_dark.png",
-                    theme: "dark",
-                  },
-                ]}
-                alt="Grid"
-                bezelCrop={{ edge: "bottom", croppedRatio: 0.1 }}
-              />
-            }
           />
 
           <CardGrid.StackedCard
             maxWidth="half"
-            title="There Are Different Font Styles For Titles"
-            titleFontStyle="cursive"
-            description="When used sparingly, it adds personality and breaks the monotony"
+            title="Play in your language"
+            description="Wordlr supports language-specific keyboards and word lists, including Spanish words with the letter Ñ."
             media={
               <CardGrid.StackedCard.Image
-                src="/app_view/screenshot_placeholder.png"
-                bezel="iPhone 17 Black"
-                bezelCrop={{ edge: "bottom", croppedRatio: 0.5 }}
-                alt=""
+                src={`${IMAGE_PATH}spanish_ahora_solve_animation.png`}
+                alt="Spanish Wordlr board using the word AHORA and a Spanish keyboard."
+                bezel={WORDLR_BEZEL}
+                bezelCrop={{ edge: "bottom", croppedRatio: 0.3 }}
               />
             }
-            layoutDirection="reverse"
-            textAlignment="center"
+            textAlignment="leading"
           />
 
           <CardGrid.StackedCard
             maxWidth="half"
-            title="Check AppView Docs For More Guidance"
-            description="There is a section about each card style and how to use it best"
+            title="Short, long, and everything between"
+            description="Go from quick one-letter warmups to longer eight-letter challenges that make every guess count."
             media={
               <CardGrid.StackedCard.Image
-                src="/app_view/screenshot_placeholder.png"
-                bezel="iPhone 17 Black"
-                bezelCrop={{ edge: "top", croppedRatio: 0.5 }}
-                alt=""
+                src={`${IMAGE_PATH}six_letter_phrase_solve_animation.png`}
+                alt="Six-letter Wordlr board with the word PHRASE in progress."
+                bezel={WORDLR_BEZEL}
+                bezelCrop={{ edge: "bottom", croppedRatio: 0.3 }}
               />
             }
-            layoutDirection="forward"
-            textAlignment="center"
+            textAlignment="leading"
           />
         </CardGrid>
       </Section>
 
-      <Section title="What people are saying" navigationAnchor="testimonials">
-        <TestimonialsGrid maxColumnCount={2}>
-          <TestimonialsGrid.Testimonial
-            message="Showing social proof is very important. Show some nice words about your app from social media or App Store reviews."
-            authorName="Jane Doe"
-            authorTitle="Person's Title"
-            authorImageUrl="/app_view/profile_image_placeholder.png"
-            messageFontStyle="italic"
-            source="https://threads.com/some-thread-message"
-          ></TestimonialsGrid.Testimonial>
+      <Section title="Find the right word faster">
+        <CardGrid rowHeight={500}>
+          <CardGrid.StackedCard
+            maxWidth="twoThirds"
+            title="Search every possible word"
+            description="Browse matching words while you play, to see whether it fits your next guess."
+            media={
+              <CardGrid.StackedCard.Image
+                src={`${IMAGE_PATH}word_search_results.png`}
+                alt="Wordlr search screen showing possible words such as WORDS, WORDY, WORKS, and WORLD."
+                bezel={WORDLR_BEZEL}
+                bezelCrop={{ edge: "bottom", croppedRatio: 0.12 }}
+              />
+            }
+            textAlignment="leading"
+          />
 
-          <TestimonialsGrid.Testimonial
-            message="If it's an App Store review, make sure to show the stars rating, it catches attention and add visual variety."
-            authorName="John Smith"
-            source="appStore"
-            starsRating={true}
-          ></TestimonialsGrid.Testimonial>
-
-          <TestimonialsGrid.Testimonial
-            message="Include a link to the testimonial's source when possible, this makes them look more trustworthy"
-            authorName="Emily Johnson"
-            source="https://reddit.com/some-thread-message"
-          ></TestimonialsGrid.Testimonial>
-
-          <TestimonialsGrid.Testimonial
-            message="Having person's credentials could also help build trust, especially if they are relevant to your app's domain."
-            authorName="Michael Brown"
-            authorTitle="CEO of Some Company"
-            source="https://x.com/some-thread-message"
-          ></TestimonialsGrid.Testimonial>
-        </TestimonialsGrid>
+          <CardGrid.StackedCard
+            maxWidth="third"
+            title="Filter by what you know"
+            description="Narrow down results by starting letters, ending letters, included letters, excluded letters, or pull clues straight from the current game."
+            media={
+              <CardGrid.StackedCard.Image
+                src={`${IMAGE_PATH}word_search_filter_options.png`}
+                alt="Wordlr filter options for search, starts with, ends with, included letters, and excluded letters."
+                bezel={WORDLR_BEZEL}
+                bezelCrop={{ edge: "bottom", croppedRatio: 0.18 }}
+              />
+            }
+            layoutDirection="reverse"
+            textAlignment="leading"
+          />
+        </CardGrid>
       </Section>
 
-      <Section title="Additional Highlights">
+      <Section title="Learn from every answer">
+        <CardGrid rowHeight={470}>
+          <CardGrid.StackedCard
+            maxWidth="third"
+            title="Definitions after the solve"
+            description="When the puzzle is done, jump straight into the answer's meaning instead of leaving the app."
+            media={
+              <CardGrid.StackedCard.Image
+                src={`${IMAGE_PATH}english_words_result.png`}
+                alt="Wordlr result screen with buttons for a new word and showing the definition."
+                bezel={WORDLR_BEZEL}
+                bezelCrop={{ edge: "top", croppedRatio: 0.15 }}
+              />
+            }
+            textAlignment="leading"
+          />
+
+          <CardGrid.StackedCard
+            maxWidth="twoThirds"
+            title="Built-in word definitions"
+            description="Read pronunciation, noun forms, examples, and usage notes without breaking your puzzle flow."
+            media={
+              <CardGrid.StackedCard.Image
+                src={`${IMAGE_PATH}word_definition_words.png`}
+                alt="Definition screen for the word WORDS with pronunciation, explanation, usage, and examples."
+                bezel={WORDLR_BEZEL}
+                bezelCrop={{ edge: "bottom", croppedRatio: 0.14 }}
+              />
+            }
+            layoutDirection="reverse"
+            textAlignment="leading"
+          />
+        </CardGrid>
+      </Section>
+
+      <Section title="Track your progress">
+        <CardGrid rowHeight={500}>
+          <CardGrid.StackedCard
+            maxWidth="half"
+            title="Statistics that keep you honest"
+            description="See amount of played words, win rate, guess distribution, and streak performance across word lengths, languages, and game modes."
+            media={
+              <CardGrid.StackedCard.Image
+                src={`${IMAGE_PATH}statistics_dashboard.png`}
+                alt="Wordlr statistics screen showing played games, win rate, guesses, and streaks."
+                bezel={WORDLR_BEZEL}
+                bezelCrop={{ edge: "bottom", croppedRatio: 0.12 }}
+              />
+            }
+            textAlignment="leading"
+          />
+
+          <CardGrid.StackedCard
+            maxWidth="half"
+            title="History you can search"
+            description="Review previous answers, filter by length, language, and mode, then view word definitions from your past games."
+            media={
+              <CardGrid.StackedCard.Image
+                src={`${IMAGE_PATH}game_history_overview.png`}
+                alt="Wordlr history screen showing previous solved words grouped by date."
+                bezel={WORDLR_BEZEL}
+                bezelCrop={{ edge: "bottom", croppedRatio: 0.12 }}
+              />
+            }
+            textAlignment="leading"
+          />
+        </CardGrid>
+      </Section>
+
+      <Section title="Why Wordlr stands out">
         <CardGrid rowHeight={280}>
           <CardGrid.IconCard
             maxWidth="third"
-            iconName="check_circle"
-            title="Icon Card"
-            description="These are great for listing highlights that don't need images"
+            iconLabel="1-8"
+            title="Not just five letters"
+            description="Choose any word length from 1 to 8 letters instead of playing the same fixed puzzle every time."
           />
 
           <CardGrid.IconCard
             maxWidth="third"
-            iconName="lock"
-            title="There Are A Ton Of Icons"
-            description="AppView uses Material Symbols for icons with a huge collection to choose from"
+            iconName="check_circle"
+            title="Smarter than guessing"
+            description="Search and filter possible words using the clues already on your board."
           />
 
           <CardGrid.IconCard
             maxWidth="third"
             iconName="star"
-            title="Check AppView Docs"
-            description="There are sections about using icons and icon cards"
+            title="Built for learning"
+            description="Use hints to reveal one letter, play in multiple languages, then review definitions, stats, and history."
           />
         </CardGrid>
       </Section>
 
       <Section paddingTop={60} paddingBottom={160}>
-        <DownloadActionButton
-          size="medium"
-        />
+        <div className={styles.finalAction}>
+          <DownloadActionButton size="medium" />
+        </div>
       </Section>
     </>
   );

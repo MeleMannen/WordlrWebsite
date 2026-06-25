@@ -19,6 +19,7 @@ export interface ImageSrcsetEntry {
 }
 
 export type Bezel =
+  | "iPhone 16 Pro Max Space Black"
   | "iPhone 17 Black"
   | "iPhone 17 Lavender"
   | "iPhone 17 Mist Blue"

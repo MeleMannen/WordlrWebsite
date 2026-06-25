@@ -1,6 +1,6 @@
 import { buildClassNameForFontStyle } from "@/lib/utils";
 import type { FontStyle } from "@/types/shared";
-import sharedGridStyles from "../../shared.module.css";
+import { TiltCard } from "../tilt_card/tilt_card";
 import { StackedCardImage } from "./components/stacked_card_image/stacked_card_image";
 import { StackedCardVideo } from "./components/stacked_card_video/stacked_card_video";
 import styles from "./stacked_card.module.css";
@@ -30,9 +30,7 @@ export function StackedCard({
   });
 
   return (
-    <figure
-      className={`${sharedGridStyles.gridCardItem} ${sharedGridStyles[maxWidth]}`}
-    >
+    <TiltCard maxWidth={maxWidth}>
       <div className={`${styles.content} ${styles[layoutDirection]}`}>
         <div className={styles.media}>{media}</div>
         <div
@@ -46,7 +44,7 @@ export function StackedCard({
           </div>
         </div>
       </div>
-    </figure>
+    </TiltCard>
   );
 }
 

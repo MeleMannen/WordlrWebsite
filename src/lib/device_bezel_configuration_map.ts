@@ -2,6 +2,14 @@ import type { Bezel, BezelConfiguration } from "../types/shared";
 
 export const DEVICE_BEZEL_CONFIGURATION_MAP: Record<Bezel, BezelConfiguration> =
   {
+    // iPhone 16 Pro Max
+    "iPhone 16 Pro Max Space Black": {
+      src: "/app_view/bezels/iphone_16_pro_max/space_black.png",
+      maskSrc: "/app_view/bezels/iphone_16_pro_max/mask.png",
+      horizontalOffset: 75,
+      verticalOffset: 66,
+      shadowBottomOffset: -2,
+    },
     // iPhone 17
     "iPhone 17 Black": {
       src: "/app_view/bezels/iphone_17/black_portrait.png",

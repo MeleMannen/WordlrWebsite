@@ -6,7 +6,7 @@ import { ColorScheme } from "./types/shared";
  * "light" - forces your website to always use light theme
  * "dark" - forces your website to always use dark theme
  */
-export const THEME: "system" | "light" | "dark" = "system";
+export const THEME: "system" | "light" | "dark" = "dark";
 
 /**
  * Your App Store App ID without the 'id' prefix.
@@ -15,7 +15,7 @@ export const THEME: "system" | "light" | "dark" = "system";
  *
  * Example: "6502667826"
  */
-export const APP_ID = "1234567890";
+export const APP_ID = "6740833142";
 
 /**
  * Custom fonts for 'whimsical' and 'cursive' font styles.
@@ -41,14 +41,14 @@ export const MATERIAL_SYMBOLS = [
 // Neutral
 export const COLORS: ColorScheme = {
   LIGHT: {
-    "text-primary": "#000000",
-    "text-secondary": "rgba(60, 60, 67, 0.60)",
-    "fill-0": "#FFFFFF",
-    "fill-1": "#F2F2F7",
-    "fill-2": "#E5E5EA",
-    "fill-3": "#D1D1D6",
-    "accent-brand": "#000000",
-    "accent-orange": "#FF8D28",
+    "text-primary": "#142014",
+    "text-secondary": "rgba(44, 76, 52, 0.66)",
+    "fill-0": "#ffffff",
+    "fill-1": "#eef7f0",
+    "fill-2": "#dcefe0",
+    "fill-3": "#c8e2ce",
+    "accent-brand": "#2f8a57",
+    "accent-orange": "#f58a4a",
     "accent-green": "#34C759",
     "accent-red": "#FF3B30",
     "accent-blue": "#007AFF",
@@ -58,14 +58,14 @@ export const COLORS: ColorScheme = {
     "accent-pink": "#FF2D55",
   },
   DARK: {
-    "text-primary": "#FFFFFF",
-    "text-secondary": "rgba(235, 235, 245, 0.60)",
-    "fill-0": "#000000",
-    "fill-1": "#121214",
-    "fill-2": "#272729",
-    "fill-3": "#3A3A3C",
-    "accent-brand": "#FFFFFF",
-    "accent-orange": "#FF9230",
+    "text-primary": "#f2fbf5",
+    "text-secondary": "rgba(200, 224, 206, 0.7)",
+    "fill-0": "#0b140f",
+    "fill-1": "#101b14",
+    "fill-2": "#1b2c22",
+    "fill-3": "#264032",
+    "accent-brand": "#2FA956",
+    "accent-orange": "#ff9a4a",
     "accent-green": "#30D158",
     "accent-red": "#FF453A",
     "accent-blue": "#0A84FF",
@@ -73,7 +73,7 @@ export const COLORS: ColorScheme = {
     "accent-mint": "#63E6E2",
     "accent-purple": "#BF5AF2",
     "accent-pink": "#FF375F",
-  },
+  }
 } as const;
 
 export const MAX_RELEASE_NOTES_PER_PAGE = 5;

@@ -5,7 +5,7 @@ import { buildClassNameForFontStyle, findSrcForTheme } from "@/lib/utils";
 import Image from "next/image";
 import { ReactEventHandler, useState } from "react";
 import type { FontStyle, ImageSrcsetEntry } from "../../../../types/shared";
-import sharedGridStyles from "../../shared.module.css";
+import { TiltCard } from "../tilt_card/tilt_card";
 import styles from "./overlaid_card.module.css";
 
 interface OverlaidCardProps {
@@ -68,8 +68,9 @@ export function OverlaidCard({
       : undefined;
 
   return (
-    <figure
-      className={`${sharedGridStyles.gridCardItem} ${sharedGridStyles[maxWidth]} ${styles.overlaidCard} ${styles[textAlignment]}`}
+    <TiltCard
+      maxWidth={maxWidth}
+      className={`${styles.overlaidCard} ${styles[textAlignment]}`}
     >
       <div className={styles.image}>
         <BackgroundImage
@@ -84,7 +85,7 @@ export function OverlaidCard({
         <h2 className={`${styles.title} ${titleFontStyleClass}`}>{title}</h2>
         <p className={styles.description}>{description}</p>
       </div>
-    </figure>
+    </TiltCard>
   );
 }
 
