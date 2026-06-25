@@ -9,6 +9,7 @@ import { Navbar } from "@/components/navbar/navbar";
 import { TelemetryDeckAnalytics } from "@/components/telemetrydeck_analytics/telemetrydeck_analytics";
 import { ThemeStyle } from "@/components/theme_style/theme_style";
 import { VercelAnalytics } from "@/components/vercel_analytics/vercel_analytics";
+import { VercelSpeedInsights } from "@/components/vercel_speed_insights/vercel_speed_insights";
 import "@/global.css";
 import { ThemeProvider } from "@/providers/theme_provider";
 
@@ -141,6 +142,7 @@ export default function RootLayout({
           />
         )}
         <VercelAnalytics />
+        <VercelSpeedInsights />
       </body>
     </html>
   );

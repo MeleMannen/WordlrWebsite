@@ -31,6 +31,7 @@
     "@telemetrydeck/sdk": "^2.0.4",
     "@types/mdx": "^2.0.13",
     "@vercel/analytics": "^1.6.1",
+    "@vercel/speed-insights": "^2.0.0",
     "chroma-js": "^3.2.0",
     "next": "16.2.7",
     "react": "19.2.7",
