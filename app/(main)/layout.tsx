@@ -6,10 +6,13 @@ import { CompactFooter } from "@/components/compact_footer/compact_footer";
 import { DownloadActionButton } from "@/components/download_action_button/download_action_button";
 import { MaterialSymbolsLink } from "@/components/material_symbols_link/material_symbols_link";
 import { Navbar } from "@/components/navbar/navbar";
+import { TelemetryDeckAnalytics } from "@/components/telemetrydeck_analytics/telemetrydeck_analytics";
 import { ThemeStyle } from "@/components/theme_style/theme_style";
 import { VercelAnalytics } from "@/components/vercel_analytics/vercel_analytics";
 import "@/global.css";
 import { ThemeProvider } from "@/providers/theme_provider";
+
+const TELEMETRYDECK_APP_ID = process.env.NEXT_PUBLIC_TELEMETRYDECK_APP_ID;
 
 export const metadata: Metadata = {
   /**
@@ -131,7 +134,12 @@ export default function RootLayout({
         </ThemeProvider>
 
         {/* <PlausibleAnalytics domain="your-app-domain.com" /> */}
-        {/* <TelemetryDeckAnalytics appID="your-telemetrydeck-app-id" clientUser="anonymous" /> */}
+        {TELEMETRYDECK_APP_ID && (
+          <TelemetryDeckAnalytics
+            appID={TELEMETRYDECK_APP_ID}
+            clientUser="anonymous"
+          />
+        )}
         <VercelAnalytics />
       </body>
     </html>
