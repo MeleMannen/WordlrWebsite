@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   /**
    * Your website URL.
    */
-  metadataBase: new URL("https://app-website-url.com"),
+  metadataBase: new URL("https://www.wordlr.app"),
 
   /**
    * Info inside `openGraph` and `twitter` is used to show rich previews
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Wordlr - Guess the word",
     description: "A flexible word game with 1-8 letter puzzles, multiple languages, searchable word lists, definitions, stats, and history.",
-    url: "https://app-website-url.com",
+    url: "https://www.wordlr.app",
     images: [
       {
         url: "/og-preview.png",
