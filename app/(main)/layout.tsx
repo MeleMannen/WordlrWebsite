@@ -7,6 +7,7 @@ import { DownloadActionButton } from "@/components/download_action_button/downlo
 import { MaterialSymbolsLink } from "@/components/material_symbols_link/material_symbols_link";
 import { Navbar } from "@/components/navbar/navbar";
 import { ThemeStyle } from "@/components/theme_style/theme_style";
+import { VercelAnalytics } from "@/components/vercel_analytics/vercel_analytics";
 import "@/global.css";
 import { ThemeProvider } from "@/providers/theme_provider";
 
@@ -131,7 +132,7 @@ export default function RootLayout({
 
         {/* <PlausibleAnalytics domain="your-app-domain.com" /> */}
         {/* <TelemetryDeckAnalytics appID="your-telemetrydeck-app-id" clientUser="anonymous" /> */}
-        {/* <VercelAnalytics /> */}
+        <VercelAnalytics />
       </body>
     </html>
   );
