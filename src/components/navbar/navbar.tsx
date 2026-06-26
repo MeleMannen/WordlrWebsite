@@ -1,6 +1,8 @@
 "use client";
 
+import { Icon } from "@/components/icon/icon";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import styles from "./navbar.module.css";
 
 interface NavbarProps {
@@ -11,11 +13,73 @@ interface NavbarProps {
 }
 
 export function Navbar({ icon, appName, links, action }: NavbarProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navbarRef = useRef<HTMLElement>(null);
+  const menuId = "navbar-menu";
+
+  useEffect(() => {
+    if (!isMenuOpen) {
+      return;
+    }
+
+    const onPointerDown = (event: PointerEvent) => {
+      if (
+        event.target instanceof Node &&
+        navbarRef.current?.contains(event.target)
+      ) {
+        return;
+      }
+
+      setIsMenuOpen(false);
+    };
+
+    window.addEventListener("pointerdown", onPointerDown);
+
+    return () => {
+      window.removeEventListener("pointerdown", onPointerDown);
+    };
+  }, [isMenuOpen]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 860px)");
+    const onMediaQueryChange = (event: MediaQueryListEvent) => {
+      if (event.matches) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (mediaQuery.matches) {
+      setIsMenuOpen(false);
+    }
+
+    mediaQuery.addEventListener("change", onMediaQueryChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", onMediaQueryChange);
+    };
+  }, []);
+
+  const renderLink = (link: NonNullable<NavbarProps["links"]>[number]) => {
+    const href = link.href.startsWith("#")
+      ? `/${link.href}`
+      : link.href;
+
+    return link.external ? (
+      <a href={href} onClick={() => setIsMenuOpen(false)}>
+        {link.label}
+      </a>
+    ) : (
+      <Link href={href} onClick={() => setIsMenuOpen(false)}>
+        {link.label}
+      </Link>
+    );
+  };
+
   return (
     <>
       <div className={styles.spacer}></div>
       <div className={styles.navbarContainer}>
-        <nav className={styles.navbar}>
+        <nav className={styles.navbar} ref={navbarRef}>
           <div className={styles.content}>
             <Link className={styles.appIdentity} href="/">
               <div className={styles.appIconContainer}>{icon}</div>
@@ -25,24 +89,43 @@ export function Navbar({ icon, appName, links, action }: NavbarProps) {
 
             <ul className={styles.navLinks}>
               {links?.map((link) => {
-                const href = link.href.startsWith("#")
-                  ? `/${link.href}`
-                  : link.href;
-
                 return (
                   <li key={link.href} className={styles.navLinkItem}>
-                    {link.external ? (
-                      <a href={href}>{link.label}</a>
-                    ) : (
-                      <Link href={href}>{link.label}</Link>
-                    )}
+                    {renderLink(link)}
                   </li>
                 );
               })}
             </ul>
 
             <div className={styles.action}>{action}</div>
+
+            {links && links.length > 0 && (
+              <button
+                type="button"
+                className={styles.menuButton}
+                aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+                aria-controls={menuId}
+                aria-expanded={isMenuOpen}
+                onClick={() => setIsMenuOpen((currentValue) => !currentValue)}
+              >
+                <Icon name={isMenuOpen ? "close" : "menu"} size={24} />
+              </button>
+            )}
           </div>
+
+          {links && links.length > 0 && (
+            <div
+              id={menuId}
+              className={`${styles.mobileMenu} ${isMenuOpen ? styles.open : ""}`}
+            >
+              <ul>
+                {links.map((link) => (
+                  <li key={link.href}>{renderLink(link)}</li>
+                ))}
+              </ul>
+              <div className={styles.mobileAction}>{action}</div>
+            </div>
+          )}
         </nav>
       </div>
     </>

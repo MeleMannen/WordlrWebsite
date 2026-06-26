@@ -36,6 +36,8 @@ export const MATERIAL_SYMBOLS = [
   "pause",
   "lock",
   "target",
+  "menu",
+  "close",
 ] as const;
 
 // Neutral

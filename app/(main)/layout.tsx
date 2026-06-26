@@ -77,6 +77,7 @@ export default function RootLayout({
         )}
 
         <link rel="icon" href="/favicon.png" type="image/png" sizes="48x48" />
+        <meta name="google-site-verification" content="Qz7Az6ij-BaMWp__SY5nWL06-tlqgWaRuG95t6HlmtA" />
 
         <ThemeStyle />
         <MaterialSymbolsLink />
@@ -86,7 +87,7 @@ export default function RootLayout({
           {!IS_WAITLIST_ENABLED && (
             <Navbar
               icon={<AppIcon src="/favicon.png" />}
-              appName="Wordlr"
+              appName="Wordlr - Guess the word"
               links={[
                 { label: "Features", href: "#features" },
                 // Uncomment the line below once you're ready to start using Release Notes
@@ -133,8 +134,7 @@ export default function RootLayout({
             }
           />
         </ThemeProvider>
-
-        {/* <PlausibleAnalytics domain="your-app-domain.com" /> */}
+        
         {TELEMETRYDECK_APP_ID && (
           <TelemetryDeckAnalytics
             appID={TELEMETRYDECK_APP_ID}
