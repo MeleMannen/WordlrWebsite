@@ -92,7 +92,7 @@ export default function RootLayout({
                 { label: "Features", href: "#features" },
                 // Uncomment the line below once you're ready to start using Release Notes
                 // { label: "Release Notes", href: "/release-notes" },
-                { label: "Contact", href: "mailto:kristoffer.fredrik@icloud.com" },
+                { label: "Support", href: "/support" },
               ]}
               action={<DownloadActionButton />}
             />
@@ -111,6 +111,7 @@ export default function RootLayout({
               />
             }
             links={[
+              { label: "Support", href: "/support" },
               { label: "Privacy Policy", href: "/privacy" },
               {
                 label: "Terms of Use",
