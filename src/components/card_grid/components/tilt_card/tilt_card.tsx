@@ -19,24 +19,67 @@ type TiltCardStyle = CSSProperties & {
 const MAX_ROTATION = 7;
 
 export function TiltCard({ maxWidth, children, className }: TiltCardProps) {
-  const onPointerMove = (event: PointerEvent<HTMLElement>) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const pointerX = (event.clientX - rect.left) / rect.width;
-    const pointerY = (event.clientY - rect.top) / rect.height;
+  const updateTilt = (
+    element: HTMLElement,
+    clientX: number,
+    clientY: number,
+  ) => {
+    const rect = element.getBoundingClientRect();
+    const clampedX = Math.min(Math.max(clientX - rect.left, 0), rect.width);
+    const clampedY = Math.min(Math.max(clientY - rect.top, 0), rect.height);
+    const pointerX = clampedX / rect.width;
+    const pointerY = clampedY / rect.height;
     const rotateY = (pointerX - 0.5) * MAX_ROTATION * 2;
     const rotateX = (0.5 - pointerY) * MAX_ROTATION * 2;
 
-    event.currentTarget.style.setProperty("--tilt-rotate-x", `${rotateX}deg`);
-    event.currentTarget.style.setProperty("--tilt-rotate-y", `${rotateY}deg`);
-    event.currentTarget.style.setProperty("--tilt-glow-x", `${pointerX * 100}%`);
-    event.currentTarget.style.setProperty("--tilt-glow-y", `${pointerY * 100}%`);
+    element.style.setProperty("--tilt-rotate-x", `${rotateX}deg`);
+    element.style.setProperty("--tilt-rotate-y", `${rotateY}deg`);
+    element.style.setProperty("--tilt-glow-x", `${pointerX * 100}%`);
+    element.style.setProperty("--tilt-glow-y", `${pointerY * 100}%`);
+  };
+
+  const resetTilt = (element: HTMLElement) => {
+    element.style.setProperty("--tilt-rotate-x", "0deg");
+    element.style.setProperty("--tilt-rotate-y", "0deg");
+    element.style.setProperty("--tilt-glow-x", "50%");
+    element.style.setProperty("--tilt-glow-y", "50%");
+  };
+
+  const onPointerDown = (event: PointerEvent<HTMLElement>) => {
+    event.currentTarget.setPointerCapture(event.pointerId);
+    updateTilt(event.currentTarget, event.clientX, event.clientY);
+  };
+
+  const onPointerMove = (event: PointerEvent<HTMLElement>) => {
+    if (event.pointerType === "touch" && !event.currentTarget.hasPointerCapture(event.pointerId)) {
+      return;
+    }
+
+    updateTilt(event.currentTarget, event.clientX, event.clientY);
+  };
+
+  const onPointerUp = (event: PointerEvent<HTMLElement>) => {
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+
+    resetTilt(event.currentTarget);
   };
 
   const onPointerLeave = (event: PointerEvent<HTMLElement>) => {
-    event.currentTarget.style.setProperty("--tilt-rotate-x", "0deg");
-    event.currentTarget.style.setProperty("--tilt-rotate-y", "0deg");
-    event.currentTarget.style.setProperty("--tilt-glow-x", "50%");
-    event.currentTarget.style.setProperty("--tilt-glow-y", "50%");
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      return;
+    }
+
+    resetTilt(event.currentTarget);
+  };
+
+  const onPointerCancel = (event: PointerEvent<HTMLElement>) => {
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+
+    resetTilt(event.currentTarget);
   };
 
   return (
@@ -50,8 +93,11 @@ export function TiltCard({ maxWidth, children, className }: TiltCardProps) {
           "--tilt-glow-y": "50%",
         } as TiltCardStyle
       }
+      onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
       onPointerLeave={onPointerLeave}
+      onPointerCancel={onPointerCancel}
     >
       {children}
     </figure>

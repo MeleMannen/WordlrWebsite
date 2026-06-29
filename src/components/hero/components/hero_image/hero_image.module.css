@@ -17,11 +17,12 @@
     filter 180ms ease,
     transform 180ms ease;
   will-change: transform;
+  touch-action: pan-y;
 
   &::after {
     content: "";
     position: absolute;
-    inset: 10% 12% 8%;
+    inset: 8% 10%;
     z-index: 0;
     pointer-events: none;
     background:
@@ -51,14 +52,14 @@
   object-fit: contain;
   object-position: center;
   filter:
-    drop-shadow(0 24px 42px color-mix(in srgb, #19d86a 22%, transparent))
+    drop-shadow(0 8px 46px color-mix(in srgb, #19d86a 24%, transparent))
     drop-shadow(0 8px 20px rgb(0 0 0 / 0.42));
   transition: filter 180ms ease;
 }
 
 .heroImage:hover .imageCanvas {
   filter:
-    drop-shadow(0 34px 62px color-mix(in srgb, #19d86a 38%, transparent))
+    drop-shadow(0 10px 66px color-mix(in srgb, #19d86a 40%, transparent))
     drop-shadow(0 10px 24px rgb(0 0 0 / 0.48));
 }
 

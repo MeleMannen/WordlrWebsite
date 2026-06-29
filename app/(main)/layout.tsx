@@ -110,7 +110,9 @@ export default function RootLayout({
                 src="/favicon.png"
               />
             }
+            appIconHref="/"
             links={[
+              { label: "Features", href: "/#features" },
               { label: "Support", href: "/support" },
               { label: "Privacy Policy", href: "/privacy" },
               {

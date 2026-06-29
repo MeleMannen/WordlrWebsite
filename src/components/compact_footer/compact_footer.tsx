@@ -2,6 +2,7 @@ import styles from "./compact_footer.module.css";
 
 interface CompactFooterProps {
   appIcon: React.ReactNode;
+  appIconHref?: string;
   links: { label: string; href: string, external?: boolean }[];
   footnoteLeading?: React.ReactNode;
   footnoteTrailing?: React.ReactNode;
@@ -9,6 +10,7 @@ interface CompactFooterProps {
 
 export function CompactFooter({
   appIcon,
+  appIconHref,
   links,
   footnoteLeading,
   footnoteTrailing,
@@ -16,7 +18,13 @@ export function CompactFooter({
   return (
     <footer className={styles.compactFooter}>
       <div className={styles.main}>
-        <div className={styles.appIcon} aria-hidden="true">{appIcon}</div>
+        {appIconHref ? (
+          <a className={styles.appIcon} href={appIconHref} aria-label="Wordlr home">
+            {appIcon}
+          </a>
+        ) : (
+          <div className={styles.appIcon} aria-hidden="true">{appIcon}</div>
+        )}
         <div className={styles.links}>
           <ul className={styles.links}>
             {links.map((link) => (

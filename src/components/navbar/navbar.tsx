@@ -1,6 +1,5 @@
 "use client";
 
-import { Icon } from "@/components/icon/icon";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import styles from "./navbar.module.css";
@@ -102,13 +101,17 @@ export function Navbar({ icon, appName, links, action }: NavbarProps) {
             {links && links.length > 0 && (
               <button
                 type="button"
-                className={styles.menuButton}
+                className={`${styles.menuButton} ${isMenuOpen ? styles.open : ""}`}
                 aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
                 aria-controls={menuId}
                 aria-expanded={isMenuOpen}
                 onClick={() => setIsMenuOpen((currentValue) => !currentValue)}
               >
-                <Icon name={isMenuOpen ? "close" : "menu"} size={24} />
+                <span className={styles.menuIcon} aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                </span>
               </button>
             )}
           </div>

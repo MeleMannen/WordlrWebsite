@@ -38,6 +38,7 @@
 		scale(var(--card-scale));
 	transform-style: preserve-3d;
 	will-change: transform;
+	touch-action: pan-y;
 
 	&:hover {
 		--card-scale: 1.024;
