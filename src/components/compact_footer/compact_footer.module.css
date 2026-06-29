@@ -39,6 +39,8 @@
 }
 
 .link {
+  display: flex;
+  align-items: center;
   text-decoration: none;
   opacity: 1.0;
   transition: opacity 0.05s ease-in-out;
@@ -48,6 +50,10 @@
   }
 }
 
+.linkIcon {
+  display: block;
+  color: var(--color-text-primary);
+}
 
 .footnotes {
   display: flex;

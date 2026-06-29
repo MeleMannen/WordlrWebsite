@@ -1,9 +1,17 @@
+import XLogo from "@/public/app_view/x_logo.svg";
 import styles from "./compact_footer.module.css";
+
+type CompactFooterLink = {
+  label: string;
+  href: string;
+  external?: boolean;
+  icon?: "x";
+};
 
 interface CompactFooterProps {
   appIcon: React.ReactNode;
   appIconHref?: string;
-  links: { label: string; href: string, external?: boolean }[];
+  links: CompactFooterLink[];
   footnoteLeading?: React.ReactNode;
   footnoteTrailing?: React.ReactNode;
 }
@@ -35,7 +43,16 @@ export function CompactFooter({
                   target={link.external ? "_blank" : "_self"}
                   rel={link.external ? "noopener noreferrer" : undefined}
                 >
-                  {link.label}
+                  {link.icon === "x" ? (
+                    <XLogo
+                      className={styles.linkIcon}
+                      width={18}
+                      height={18}
+                      aria-label={link.label}
+                    />
+                  ) : (
+                    link.label
+                  )}
                 </a>
               </li>
             ))}

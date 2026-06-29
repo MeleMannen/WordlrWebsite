@@ -120,10 +120,12 @@ export default function RootLayout({
                 href: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
                 external: true,
               },
-              // {
-              //   label: "Follow Updates",
-              //   href: "https://your-social-media.com",
-              // },
+              {
+                label: "Follow Updates",
+                href: "https://x.com/WordlrApp",
+                external: true,
+                icon: "x",
+              },
             ]}
             footnoteLeading={`© ${new Date().getFullYear()}. All rights reserved.`}
             footnoteTrailing={
