@@ -250,8 +250,12 @@
     }
 
     a:hover {
-      color: #ffffff;
-      background-color: color-mix(in srgb, var(--color-accent-green) 76%, #063015);
+      color: var(--color-text-primary);
+      background-color: color-mix(in srgb, var(--color-fill-3) 62%, transparent);
+    }
+
+    a:active {
+      background-color: color-mix(in srgb, var(--color-accent-green) 18%, var(--color-fill-3));
     }
   }
 
