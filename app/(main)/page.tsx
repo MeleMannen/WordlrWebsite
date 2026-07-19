@@ -60,7 +60,7 @@ export default function Page() {
           badges={
             <RatingLaurelsBadge
               showStars={true}
-              rating={4.6}
+              rating={4.7}
               caption="Worldwide rating"
             />
           }
