@@ -13,6 +13,11 @@ type PurchaseNotificationPayload = {
   source?: string;
 };
 
+type EnvStatus = {
+  name: string;
+  configured: boolean;
+};
+
 type DecodedAppStoreNotification = {
   notificationType?: string;
   subtype?: string;
@@ -55,6 +60,18 @@ function getRequiredEnv(name: string): string {
   }
 
   return value;
+}
+
+function getEnvStatus(): EnvStatus[] {
+  return [
+    "APP_STORE_NOTIFICATION_SECRET",
+    "RESEND_API_KEY",
+    "PURCHASE_EMAIL_FROM",
+    "PURCHASE_EMAIL_TO",
+  ].map((name) => ({
+    name,
+    configured: Boolean(process.env[name]),
+  }));
 }
 
 function timingSafeEqualString(left: string, right: string): boolean {
@@ -142,6 +159,10 @@ function shouldSendEmailForNotification(
   notification: DecodedAppStoreNotification | null,
 ): boolean {
   if (!payload.signedPayload) {
+    return true;
+  }
+
+  if (process.env.PURCHASE_EMAIL_NOTIFY_ALL_APPLE_NOTIFICATIONS === "true") {
     return true;
   }
 
@@ -233,7 +254,7 @@ async function sendPurchaseEmail({
 }
 
 export default async function handler(request: Request): Promise<Response> {
-  if (request.method !== "POST") {
+  if (request.method !== "GET" && request.method !== "POST") {
     return jsonResponse({ error: "Method not allowed" }, 405);
   }
 
@@ -242,7 +263,25 @@ export default async function handler(request: Request): Promise<Response> {
       return jsonResponse({ error: "Unauthorized" }, 401);
     }
 
-    const payload = (await request.json()) as PurchaseNotificationPayload;
+    if (request.method === "GET") {
+      return jsonResponse({
+        ok: true,
+        endpoint: "purchase-notification",
+        env: getEnvStatus(),
+      });
+    }
+
+    const url = new URL(request.url);
+    const isTestEmail = url.searchParams.get("test") === "1";
+    const payload = isTestEmail
+      ? ({
+          productId: "test.product",
+          transactionId: `test-${Date.now()}`,
+          environment: "Test",
+          notificationType: "TEST",
+          source: "Manual endpoint test",
+        } satisfies PurchaseNotificationPayload)
+      : ((await request.json()) as PurchaseNotificationPayload);
     const notification = decodeJwtPayload<DecodedAppStoreNotification>(
       payload.signedPayload,
     );
@@ -251,6 +290,12 @@ export default async function handler(request: Request): Promise<Response> {
     );
 
     if (!shouldSendEmailForNotification(payload, notification)) {
+      console.log("Ignored App Store notification", {
+        notificationType: notification?.notificationType ?? "Unknown",
+        subtype: notification?.subtype ?? "None",
+        notificationUUID: notification?.notificationUUID ?? "Unknown",
+      });
+
       return jsonResponse({
         ok: true,
         ignored: true,
